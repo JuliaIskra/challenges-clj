@@ -1,10 +1,6 @@
 (ns codingame.descent
   (:gen-class))
 
-; Task:
-; At the start of each game turn, you are given the height of the 8 mountains from left to right.
-; By the end of the game turn, you must fire on the highest mountain by outputting its index (from 0 to 7).
-
 ; Game Input:
 ; Within an infinite loop, read the heights of the mountains from the standard input and print to the standard output
 ; the index of the mountain to shoot.
@@ -21,9 +17,8 @@
 ; Response time per turn ≤ 100ms
 
 ; The while loop represents the game.
-; Each iteration represents a turn of the game
-; where you are given inputs (the heights of the mountains)
-; and where you have to print an output (the index of the mountain to fire on)
+; Each iteration represents a turn of the game where you are given inputs (the heights of the mountains) and where you
+; have to print an output (the index of the mountain to fire on)
 ; The inputs you are given are automatically updated according to your last actions.
 
 (defn -main [& args]
@@ -35,3 +30,4 @@
                  [0 0])
          first
          println)))
+

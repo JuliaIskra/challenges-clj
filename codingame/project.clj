@@ -7,4 +7,5 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :main-core {:main codingame.core}
-             :main-descent {:main codingame.descent}})
+             :main-descent {:main codingame.descent}
+             :main-thor1 {:main codingame.thor1}})

@@ -4,6 +4,6 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]]
+  :main ^:skip-aot project-euler.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}
-             :main-core {:main codingame.core}})
+  :profiles {:uberjar {:aot :all}})

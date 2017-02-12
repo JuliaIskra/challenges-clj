@@ -4,8 +4,8 @@ My solutions to problems from [Project Euler](https://projecteuler.net/)
 
 ## Usage
 
-To run main from file `descent.clj` for example execute:
+To run solution for problem #1 for example execute:
 
 
-    $ lein with-profile main-descent run
+    $ lein run 1
 

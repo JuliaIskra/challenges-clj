@@ -1,7 +1,12 @@
 (ns project-euler.core
   (:gen-class))
 
+(defn problem1
+  []
+  "hey!")
+
 (defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+  [number & args]
+  (println (str "Running solution for problem #" number))
+  (println ((resolve (symbol (str "project-euler.core/problem" number))))))
+

@@ -107,7 +107,8 @@
 
 
 (defn problem6
-  "The sum of the squares of the first ten natural numbers is,
+  "https://projecteuler.net/problem=6
+  The sum of the squares of the first ten natural numbers is,
       1^2 + 2^2 + ... + 10^2 = 385
   The square of the sum of the first ten natural numbers is,
       (1 + 2 + ... + 10)^2 = 552 = 3025
@@ -121,13 +122,14 @@
 
 
 (defn problem7
-  "By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+  "https://projecteuler.net/problem=7
+  By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
   What is the 10001st prime number?"
   []
   (loop [prime-numbers []
          count         0
          next          2]
-    (if (== 10001 count)
+    (if (= 10001 count)
       (last prime-numbers)
       (if (->> prime-numbers
                (map #(mod next %1))
@@ -144,5 +146,5 @@
 (defn -main
   [number & args]
   (println (str "Running solution for problem #" number))
-  (println ((resolve (symbol (str "project-euler.core/problem" number))))))
+  (println (time ((resolve (symbol (str "project-euler.core/problem" number)))))))
 

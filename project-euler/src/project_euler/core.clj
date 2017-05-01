@@ -136,12 +136,12 @@
                (map #(mod next %1))
                (filter zero?)
                empty?)
-        (do (recur (concat prime-numbers [next])
-                   (inc count)
-                   (inc next)))
-        (do (recur prime-numbers
-                   count
-                   (inc next)))))))
+        (recur (concat prime-numbers [next])
+               (inc count)
+               (inc next))
+        (recur prime-numbers
+               count
+               (inc next))))))
 
 
 (defn problem8
@@ -195,9 +195,9 @@
            max-product 0]
       (if (>= start (- 1000 (- 13 1)))
         max-product
-        (do (let [digits  (subvec numbers start (+ start 13))
-                  product (reduce * digits)]
-              (recur (inc start) (if (< max-product product) product max-product))))))))
+        (let [digits  (subvec numbers start (+ start 13))
+              product (reduce * digits)]
+          (recur (inc start) (if (< max-product product) product max-product)))))))
 
 
 (defn problem9

@@ -264,6 +264,23 @@
        first
        :n))
 
+(defn diag-lurd-coord
+  "calculates coordinates of all diagonals that go from left up to right down"
+  [initial size]
+  (loop [count  1
+         result [initial]]
+    (prn count result)
+    (if (= count size)
+      result
+      (recur (inc count)
+             (conj result
+                   (filter (fn [[x y]] (> y -1))
+                           (for [[x y] initial]
+                             [x (- y count)]))
+                   (filter (fn [[x y]] (< y size))
+                           (for [[x y] initial]
+                             [x (+ y count)])))))))
+
 (defn problem11
   "https://projecteuler.net/problem=11
   In the 20×20 grid below, four numbers along a diagonal line have been marked in red.

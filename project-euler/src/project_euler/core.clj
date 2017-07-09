@@ -257,13 +257,6 @@
                       (map-indexed (fn [index number] {:x index :y row-number :n number})))]
     numbers))
 
-(defn get-number-by-coord
-  [x y numbers]
-  (->> numbers
-       (filter #(and (= x (%1 :x)) (= y (%1 :y))))
-       first
-       :n))
-
 (defn diag-lurd-coord
   "calculates coordinates of all diagonals that go from left up to right down"
   [size]
@@ -303,6 +296,20 @@
                      (filter (fn [[x y]] (< x size))
                              (for [[x y] initial]
                                [(+ x count) y]))))))))
+
+(defn get-number-by-coord
+  [x y numbers]
+  (->> numbers
+       (filter #(and (= x (%1 :x)) (= y (%1 :y))))
+       first
+       :n))
+
+(defn get-numbers-in-coords
+  [numbers coords]
+  (map (fn [coords-coll]
+         (map (fn [[x y]] (get-number-by-coord x y numbers))
+              coords-coll))
+       coords))
 
 (defn problem11
   "https://projecteuler.net/problem=11
@@ -365,10 +372,10 @@
         diag-lurd-coord   (diag-lurd-coord 20)
         diag-ruld-coord   (diag-ruld-coord 20)
 
-        cols              (map (fn [coords] (map (fn [[x y]] (get-number-by-coord x y numbers)) coords)) cols-coord)
-        rows              (map (fn [coords] (map (fn [[x y]] (get-number-by-coord x y numbers)) coords)) rows-coord)
-        diag-lurd         (map (fn [coords] (map (fn [[x y]] (get-number-by-coord x y numbers)) coords)) diag-lurd-coord)
-        diag-ruld         (map (fn [coords] (map (fn [[x y]] (get-number-by-coord x y numbers)) coords)) diag-ruld-coord)
+        cols              (get-numbers-in-coords numbers cols-coord)
+        rows              (get-numbers-in-coords numbers rows-coord)
+        diag-lurd         (get-numbers-in-coords numbers diag-lurd-coord)
+        diag-ruld         (get-numbers-in-coords numbers diag-ruld-coord)
 
         cols-product      (map #(greatest-product-of-n-adjacent-numbers 4 (vec %1)) cols)
         rows-product      (map #(greatest-product-of-n-adjacent-numbers 4 (vec %1)) rows)

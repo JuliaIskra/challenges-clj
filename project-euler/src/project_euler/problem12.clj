@@ -1,16 +1,23 @@
-(ns project-euler.problem12)
+(ns project-euler.problem12
+  (:require [clojure.math.numeric-tower :as math]))
 
 (defn count-divisors
   [n]
   (count
     (remove
       nil?
-      (for [d (range 1 (inc n))]
+      (for [d (range 1 (inc (math/sqrt n)))]
         (if (= (mod n d) 0) d nil)))))
 
-(defn calc-triangle-number
+(defn calc-magic-numbers
   [n]
-  (reduce + (range 1 (inc n))))
+  (if (even? n)
+    [(/ n 2) (+ n 1)]
+    [n (/ (+ n 1) 2)]))
+
+(defn calc-triangle-number
+  [[a b & rest]]
+  (* a b))
 
 (defn problem12
   "https://projecteuler.net/problem=12
@@ -31,7 +38,8 @@
   What is the value of the first triangle number to have over five hundred divisors?"
   []
   (->> (range)
-       (map calc-triangle-number)
-       (map count-divisors)
-       (filter #(> %1 500))
-       (first)))
+       (map calc-magic-numbers)
+       (map (fn [[a b]] [a b (+ 1 (count-divisors a) (count-divisors b))]))
+       (filter (fn [[a b count]] (> count 500)))
+       first
+       calc-triangle-number))

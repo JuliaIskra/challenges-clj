@@ -3,11 +3,11 @@
 
 (defn count-divisors
   [n]
-  (count
-    (remove
-      nil?
-      (for [d (range 1 (inc (math/sqrt n)))]
-        (if (= (mod n d) 0) d nil)))))
+  (->> (range 1 (math/sqrt n))
+       (map (fn [d] (if (= (mod n d) 0) [d (/ n d)] nil)))
+       (remove nil?)
+       flatten
+       count))
 
 (defn calc-magic-numbers
   [n]
@@ -16,8 +16,9 @@
     [n (/ (+ n 1) 2)]))
 
 (defn calc-triangle-number
-  [[a b & rest]]
-  (* a b))
+  [n]
+  (let [[a b] (calc-magic-numbers n)]
+    (* a b)))
 
 (defn problem12
   "https://projecteuler.net/problem=12
@@ -38,8 +39,8 @@
   What is the value of the first triangle number to have over five hundred divisors?"
   []
   (->> (range)
-       (map calc-magic-numbers)
-       (map (fn [[a b]] [a b (+ 1 (count-divisors a) (count-divisors b))]))
-       (filter (fn [[a b count]] (> count 500)))
+       (map calc-triangle-number)
+       (map (fn [n] [n (count-divisors n)]))
+       (filter (fn [[n count]] (> count 500)))
        first
-       calc-triangle-number))
+       first))

@@ -1,5 +1,18 @@
 (ns project-euler.problem13)
 
+(defn move-remainder
+  [sums]
+  (loop [prev-rem  0
+         sum       (first sums)
+         rest-sums (rest sums)
+         result    []]
+    (let [actual-sum (+ prev-rem sum)
+          rem        (int (/ actual-sum 10))
+          d          (mod actual-sum 10)]
+      (if (empty? rest-sums)
+        (concat [actual-sum] (reverse result))
+        (recur rem (first rest-sums) (rest rest-sums) (concat result [d]))))))
+
 (defn problem13
   "https://projecteuler.net/problem=13
   Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
@@ -204,5 +217,12 @@
                       "77158542502016545090413245809786882778948721859617"
                       "72107838435069186155435662884062257473692284509516"
                       "20849603980134001723930671666823555245252804609722"
-                      "53503534226472524250874054075591789781264330331690"])]
-    numbers))
+                      "53503534226472524250874054075591789781264330331690"])
+        digits  (->> numbers
+                     (apply (partial map vector))
+                     reverse)
+        sum-str (->> digits
+                     (map #(reduce + %1))
+                     move-remainder
+                     (apply str))]
+    (subs sum-str 0 10)))

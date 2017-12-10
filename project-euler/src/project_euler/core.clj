@@ -14,7 +14,8 @@
             [project-euler.problem12]
             [project-euler.problem13]
             [project-euler.problem14]
-            [project-euler.problem15]))
+            [project-euler.problem15]
+            [project-euler.problem16]))
 
 (defn -main
   [number & args]

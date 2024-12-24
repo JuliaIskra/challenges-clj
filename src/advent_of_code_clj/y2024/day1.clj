@@ -17,7 +17,7 @@
   [[a b]]
   (abs (- a b)))
 
-(defn part1
+(defn part-1
   [filename]
   (->>
     (-> (slurp filename)
@@ -30,6 +30,25 @@
     (map diff)
     (reduce +)))
 
+
+(defn calc-similarity-score
+  [[a b]]
+  (let [fr (frequencies b)]
+    (map (fn [x] (* x (get fr x 0))) a)))
+
+(defn part-2
+  [filename]
+  (->>
+    (-> (slurp filename)
+        (str/split #"\n"))
+    (map #(str/split % #"\s+"))
+    separate-first-from-second
+    (map to-int-each)
+    calc-similarity-score
+    (reduce +)))
+
+
 (defn run
   []
-  [(part1 "resources/y2024/day1/part-1.txt")])
+  [(part-1 "resources/y2024/day1/part-1.txt"),
+   (part-2 "resources/y2024/day1/part-1.txt")])

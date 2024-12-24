@@ -1,5 +1,35 @@
-(ns advent-of-code-clj.y2024.day1)
+(ns advent-of-code-clj.y2024.day1
+  (:require [clojure.string :as str]))
+
+(defn separate-first-from-second
+  [coll]
+  (let [f (map first coll) s (map second coll)] [f s]))
+
+(defn to-int-each
+  [coll]
+  (map #(Integer/parseInt %) coll))
+
+(defn zip
+  [[a b]]
+  (map vector a b))
+
+(defn diff
+  [[a b]]
+  (abs (- a b)))
+
+(defn part1
+  [filename]
+  (->>
+    (-> (slurp filename)
+        (str/split #"\n"))
+    (map #(str/split % #"\s+"))
+    separate-first-from-second
+    (map to-int-each)
+    (map sort)
+    zip
+    (map diff)
+    (reduce +)))
 
 (defn run
   []
-  (println "hello world"))
+  [(part1 "resources/y2024/day1/part-1.txt")])

@@ -1,7 +1,7 @@
 (ns advent-of-code-clj.y2024.day1
   (:require [clojure.string :as str]))
 
-(defn separate-first-from-second
+(defn separate-into-cols
   [coll]
   (let [f (map first coll) s (map second coll)] [f s]))
 
@@ -23,7 +23,7 @@
     (-> (slurp filename)
         (str/split #"\n"))
     (map #(str/split % #"\s+"))
-    separate-first-from-second
+    separate-into-cols
     (map to-int-each)
     (map sort)
     zip
@@ -42,7 +42,7 @@
     (-> (slurp filename)
         (str/split #"\n"))
     (map #(str/split % #"\s+"))
-    separate-first-from-second
+    separate-into-cols
     (map to-int-each)
     calc-similarity-score
     (reduce +)))

@@ -1,9 +1,6 @@
 (ns advent-of-code-clj.y2024.day2
-  (:require [clojure.string :as str]))
-
-(defn to-int-each
-  [coll]
-  (map #(Integer/parseInt %) coll))
+  (:require [advent-of-code-clj.utils :refer :all]
+            [clojure.string :as str]))
 
 (defn in-range?
   [diffs]

@@ -1,13 +1,10 @@
 (ns advent-of-code-clj.y2024.day1
-  (:require [clojure.string :as str]))
+  (:require [advent-of-code-clj.utils :refer :all]
+            [clojure.string :as str]))
 
 (defn separate-into-cols
   [coll]
   (let [f (map first coll) s (map second coll)] [f s]))
-
-(defn to-int-each
-  [coll]
-  (map #(Integer/parseInt %) coll))
 
 (defn zip
   [[a b]]

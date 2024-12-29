@@ -31,6 +31,35 @@
     count))
 
 
+(defn drop-nth [n coll]
+  (keep-indexed #(if (not= %1 n) %2) coll))
+
+(defn is-safe-dampener?
+  [attempt levels]
+  (let [dampened-levels (drop-nth attempt levels)
+        is-safe (->> dampened-levels
+                     (partition 2 1)
+                     (map (fn [[a b]] (- a b)))
+                     in-range?)]
+    (if (or is-safe (= attempt (count levels)))
+      is-safe
+      (is-safe-dampener? (+ attempt 1) levels))
+    ))
+
+(defn part-2
+  [filename]
+  (->>
+    (-> (slurp filename)
+        (str/split #"\n"))
+    (map #(str/split % #" "))
+    (map to-int-each)
+    (map #(is-safe-dampener? -1 %))
+    (filter true?)
+    count
+    ))
+
+
 (defn run
   []
-  [(part-1 "resources/y2024/day2/part-1.txt")])
+  [(part-1 "resources/y2024/day2/input.txt"),
+   (part-2 "resources/y2024/day2/input.txt")])

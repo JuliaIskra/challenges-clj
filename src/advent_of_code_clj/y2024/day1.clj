@@ -50,5 +50,5 @@
 
 (defn run
   []
-  [(part-1 "resources/y2024/day1/part-1.txt"),
-   (part-2 "resources/y2024/day1/part-1.txt")])
+  [(part-1 "resources/y2024/day1/input.txt"),
+   (part-2 "resources/y2024/day1/input.txt")])

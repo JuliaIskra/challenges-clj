@@ -32,16 +32,16 @@
   (keep-indexed #(if (not= %1 n) %2) coll))
 
 (defn is-safe-dampener?
-  [attempt levels]
-  (let [dampened-levels (drop-nth attempt levels)
-        is-safe (->> dampened-levels
-                     (partition 2 1)
-                     (map (fn [[a b]] (- a b)))
-                     in-range?)]
-    (if (or is-safe (= attempt (count levels)))
-      is-safe
-      (is-safe-dampener? (+ attempt 1) levels))
-    ))
+  [levels]
+  (loop [i -1]
+    (let [dampened-levels (drop-nth i levels)
+          is-safe (->> dampened-levels
+                       (partition 2 1)
+                       (map (fn [[a b]] (- a b)))
+                       in-range?)]
+      (if (or is-safe (= i (count levels)))
+        is-safe
+        (recur (inc i))))))
 
 (defn part-2
   [filename]
@@ -50,10 +50,9 @@
         (str/split #"\n"))
     (map #(str/split % #" "))
     (map to-int-each)
-    (map #(is-safe-dampener? -1 %))
+    (map #(is-safe-dampener? %))
     (filter true?)
-    count
-    ))
+    count))
 
 
 (defn run

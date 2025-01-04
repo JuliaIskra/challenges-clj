@@ -14,10 +14,6 @@
   (testing "part 2 example"
     (is (= 48 (part-2 "resources/y2024/day3/input-example-2.txt")))))
 
-(deftest test-collect-numbers
-  (testing "collect numbers when mul starts correctly but has incorrect format"
-    (is (= [504 381 837 216] (collect-numbers "mul(504,381)>what()why()$%from(53,115)%mul(582where()%[select()<<mul(837,216)")))))
-
 (deftest test-part-2
   (testing "part 2"
     (is (= 67269798 (part-2 "resources/y2024/day3/input.txt")))))

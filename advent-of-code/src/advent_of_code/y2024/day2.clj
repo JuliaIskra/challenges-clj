@@ -1,5 +1,5 @@
-(ns advent-of-code-clj.y2024.day2
-  (:require [advent-of-code-clj.utils :refer :all]
+(ns advent-of-code.y2024.day2
+  (:require [advent-of-code.utils :refer :all]
             [clojure.string :as str]))
 
 (defn in-range?

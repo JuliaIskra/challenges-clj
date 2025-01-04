@@ -1,4 +1,4 @@
-(ns advent-of-code-clj.utils)
+(ns advent-of-code.utils)
 
 (defn to-int-each
   [coll]
